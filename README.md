@@ -134,6 +134,15 @@ directory within the `status-right` and move the window names to the
 set -g @catppuccin_window_tabs_enabled on # or off to disable window_tabs
 ```
 
+#### Disable directory
+
+By default, the window tabs `directory` component is set to on.
+It can be disabled by toggling it off.
+
+```sh
+set -g @catppuccin_window_tabs_directory "off"
+```
+
 ### Configure separator
 
 By default, the theme will use a round separator.
