@@ -104,6 +104,30 @@ main() {
   r_right_separator="$(get_tmux_option "@catppuccin_r_right_separator" "")"
   readonly r_right_separator
 
+  local r_custom_element_1
+  r_custom_element_1="$(get_tmux_option "@catppuccin_r_custom_element_1" "off")"
+  readonly r_custom_element_1
+
+  local r_custom_element_2
+  r_custom_element_2="$(get_tmux_option "@catppuccin_r_custom_element_2" "off")"
+  readonly r_custom_element_2
+
+  local r_custom_element_3
+  r_custom_element_3="$(get_tmux_option "@catppuccin_r_custom_element_3" "off")"
+  readonly r_custom_element_3
+
+  local r_custom_icon_1
+  r_custom_icon_1="$(get_tmux_option "@catppuccin_r_custom_icon_1" "!")"
+  readonly r_custom_icon_1
+
+  local r_custom_icon_2
+  r_custom_icon_2="$(get_tmux_option "@catppuccin_r_custom_icon_2" "!")"
+  readonly r_custom_icon_2
+
+  local r_custom_icon_3
+  r_custom_icon_3="$(get_tmux_option "@catppuccin_r_custom_icon_3" "!")"
+  readonly r_custom_icon_3
+
   local user
   user="$(get_tmux_option "@catppuccin_user" "off")"
   readonly user
@@ -188,6 +212,18 @@ main() {
     fi
     window_status_format=$show_window_in_window_status
     window_status_current_format=$show_window_in_window_status_current
+  fi
+
+  if [[ "${r_custom_element_1}" != "off" ]]; then
+    right_column1=$right_column1$show_r_custom_1
+  fi
+
+  if [[ "${r_custom_element_2}" != "off" ]]; then
+    right_column1=$right_column1$show_r_custom_2
+  fi
+
+  if [[ "${r_custom_element_3}" != "off" ]]; then
+    right_column1=$right_column1$show_r_custom_3
   fi
 
   if [[ "${user}" == "on" ]]; then
