@@ -182,6 +182,28 @@ It can be enabled by toggling it on.
 set -g @catppuccin_host "on"
 ```
 
+### Configure Widgets
+
+Up to 4 additional custom widgets can be added.
+Example config:
+
+```sh
+set -g @catppuccin_r_custom_element_1 "#{cpu_percentage}"
+set -g @catppuccin_r_custom_icon_1 "#{cpu_icon}"  # From tmux-plugins/tmux-cpu
+set -g @catppuccin_r_custom_element_2 "#(free -h --si | sed -n 2p | awk -F ' ' '{print $3}' | sed 's/,/./')/#(free -h --si | sed -n 2p | awk -F ' ' '{print $2}' | sed 's/,/./')"
+set -g @catppuccin_r_custom_icon_2 "#{ram_icon}"  # From tmux-plugins/tmux-cpu
+if-shell '[ -d /sys/class/power_supply/BAT* ] || [ -d /sys/class/battery ]' {
+    set -g @catppuccin_r_custom_element_3 "#{battery_percentage}%"
+    set -g @catppuccin_r_custom_icon_3 "#{battery_icon}"  # From tmux-plugins/tmux-battery
+}
+if-shell '[ -x "$(command -v sensors)" ]' {
+    set -g @catppuccin_r_custom_element_4 "#{cpu_temp}"
+    set -g @catppuccin_r_custom_icon_4 "🌡" # From tmux-plugins/tmux-cpu
+}
+```
+
+![Pill shape](./assets/plugins.webp)
+
 ### Customize Icons
 
 Each of the components comes with their own default icon, which
