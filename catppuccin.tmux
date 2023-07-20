@@ -116,6 +116,10 @@ main() {
   r_custom_element_3="$(get_tmux_option "@catppuccin_r_custom_element_3" "off")"
   readonly r_custom_element_3
 
+  local r_custom_element_4
+  r_custom_element_4="$(get_tmux_option "@catppuccin_r_custom_element_4" "off")"
+  readonly r_custom_element_4
+
   local r_custom_icon_1
   r_custom_icon_1="$(get_tmux_option "@catppuccin_r_custom_icon_1" "!")"
   readonly r_custom_icon_1
@@ -127,6 +131,10 @@ main() {
   local r_custom_icon_3
   r_custom_icon_3="$(get_tmux_option "@catppuccin_r_custom_icon_3" "!")"
   readonly r_custom_icon_3
+
+  local r_custom_icon_4
+  r_custom_icon_4="$(get_tmux_option "@catppuccin_r_custom_icon_4" "!")"
+  readonly r_custom_icon_4
 
   local user
   user="$(get_tmux_option "@catppuccin_user" "off")"
@@ -203,17 +211,7 @@ main() {
   local window_status_format=$show_directory_in_window_status
   local window_status_current_format=$show_directory_in_window_status_current
 
-  # NOTE: With the @catppuccin_window_tabs_enabled set to on, we're going to
-  # update the right_column1 and the window_status_* variables.
-  if [[ "${wt_enabled}" == "on" ]]; then
-    right_column1=
-    if [[ "${directory}" == "on" ]]; then
-      right_column1=$show_directory
-    fi
-    window_status_format=$show_window_in_window_status
-    window_status_current_format=$show_window_in_window_status_current
-  fi
-
+  right_column1=
   if [[ "${r_custom_element_1}" != "off" ]]; then
     right_column1=$right_column1$show_r_custom_1
   fi
@@ -224,6 +222,20 @@ main() {
 
   if [[ "${r_custom_element_3}" != "off" ]]; then
     right_column1=$right_column1$show_r_custom_3
+  fi
+
+  if [[ "${r_custom_element_4}" != "off" ]]; then
+    right_column1=$right_column1$show_r_custom_4
+  fi
+
+  # NOTE: With the @catppuccin_window_tabs_enabled set to on, we're going to
+  # update the right_column1 and the window_status_* variables.
+  if [[ "${wt_enabled}" == "on" ]]; then
+    if [[ "${directory}" == "on" ]]; then
+      right_column1=$right_column1$show_directory
+    fi
+    window_status_format=$show_window_in_window_status
+    window_status_current_format=$show_window_in_window_status_current
   fi
 
   if [[ "${user}" == "on" ]]; then
