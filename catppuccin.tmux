@@ -69,11 +69,11 @@ main() {
   local wt_enabled
   wt_enabled="$(get_tmux_option "@catppuccin_window_tabs_enabled" "off")"
   readonly wt_enabled
- 
+
   local pill_theme_enabled
   pill_theme_enabled="$(get_tmux_option "@catppuccin_pill_theme_enabled" "off")"
   readonly pill_theme_enabled
-  
+
   local powerline_theme_enabled
   powerline_theme_enabled="$(get_tmux_option "@catppuccin_powerline_theme_enabled" "off")"
   readonly powerline_theme_enabled
@@ -85,8 +85,8 @@ main() {
   local no_patched_fonts_theme_enabled
   no_patched_fonts_theme_enabled="$(get_tmux_option "@catppuccin_no_patched_fonts_theme_enabled" "off")"
   readonly no_patched_fonts_theme_enabled
-  
-  # Separators for the left status / window list 
+
+  # Separators for the left status / window list
   local l_left_separator
   l_left_separator="$(get_tmux_option "@catppuccin_l_left_separator" "")"
   readonly l_left_separator
@@ -95,7 +95,7 @@ main() {
   l_right_separator="$(get_tmux_option "@catppuccin_l_right_separator" "")"
   readonly l_right_separator
 
-  # Separators for the right status 
+  # Separators for the right status
   local r_left_separator
   r_left_separator="$(get_tmux_option "@catppuccin_r_left_separator" "")"
   readonly r_left_separator
@@ -103,7 +103,39 @@ main() {
   local r_right_separator
   r_right_separator="$(get_tmux_option "@catppuccin_r_right_separator" "")"
   readonly r_right_separator
-  
+
+  local r_custom_element_1
+  r_custom_element_1="$(get_tmux_option "@catppuccin_r_custom_element_1" "off")"
+  readonly r_custom_element_1
+
+  local r_custom_element_2
+  r_custom_element_2="$(get_tmux_option "@catppuccin_r_custom_element_2" "off")"
+  readonly r_custom_element_2
+
+  local r_custom_element_3
+  r_custom_element_3="$(get_tmux_option "@catppuccin_r_custom_element_3" "off")"
+  readonly r_custom_element_3
+
+  local r_custom_element_4
+  r_custom_element_4="$(get_tmux_option "@catppuccin_r_custom_element_4" "off")"
+  readonly r_custom_element_4
+
+  local r_custom_icon_1
+  r_custom_icon_1="$(get_tmux_option "@catppuccin_r_custom_icon_1" "!")"
+  readonly r_custom_icon_1
+
+  local r_custom_icon_2
+  r_custom_icon_2="$(get_tmux_option "@catppuccin_r_custom_icon_2" "!")"
+  readonly r_custom_icon_2
+
+  local r_custom_icon_3
+  r_custom_icon_3="$(get_tmux_option "@catppuccin_r_custom_icon_3" "!")"
+  readonly r_custom_icon_3
+
+  local r_custom_icon_4
+  r_custom_icon_4="$(get_tmux_option "@catppuccin_r_custom_icon_4" "!")"
+  readonly r_custom_icon_4
+
   local user
   user="$(get_tmux_option "@catppuccin_user" "off")"
   readonly user
@@ -115,7 +147,11 @@ main() {
   local date_time
   date_time="$(get_tmux_option "@catppuccin_date_time" "off")"
   readonly date_time
- 
+
+  local directory
+  directory="$(get_tmux_option "@catppuccin_window_tabs_directory" "on")"
+  readonly directory
+
   # Icons
   local directory_icon
   directory_icon="$(get_tmux_option "@catppuccin_directory_icon" "")"
@@ -143,7 +179,7 @@ main() {
 
   # Source status line themes
   if [[ "${pill_theme_enabled}" == "off" ]] &&
-    [[ "${powerline_theme_enabled}"  == "off" ]] && 
+    [[ "${powerline_theme_enabled}"  == "off" ]] &&
     [[ "${powerline_icons_theme_enabled}" == "off" ]] &&
     [[ "${no_patched_fonts_theme_enabled}" == "off" ]]; then
     source "$PLUGIN_DIR/$DEFAULT_STATUS_LINE_FILE"
@@ -175,10 +211,29 @@ main() {
   local window_status_format=$show_directory_in_window_status
   local window_status_current_format=$show_directory_in_window_status_current
 
+  right_column1=
+  if [[ "${r_custom_element_1}" != "off" ]]; then
+    right_column1=$right_column1$show_r_custom_1
+  fi
+
+  if [[ "${r_custom_element_2}" != "off" ]]; then
+    right_column1=$right_column1$show_r_custom_2
+  fi
+
+  if [[ "${r_custom_element_3}" != "off" ]]; then
+    right_column1=$right_column1$show_r_custom_3
+  fi
+
+  if [[ "${r_custom_element_4}" != "off" ]]; then
+    right_column1=$right_column1$show_r_custom_4
+  fi
+
   # NOTE: With the @catppuccin_window_tabs_enabled set to on, we're going to
   # update the right_column1 and the window_status_* variables.
   if [[ "${wt_enabled}" == "on" ]]; then
-    right_column1=$show_directory
+    if [[ "${directory}" == "on" ]]; then
+      right_column1=$right_column1$show_directory
+    fi
     window_status_format=$show_window_in_window_status
     window_status_current_format=$show_window_in_window_status_current
   fi
