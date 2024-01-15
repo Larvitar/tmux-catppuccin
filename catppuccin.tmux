@@ -86,6 +86,10 @@ main() {
   no_patched_fonts_theme_enabled="$(get_tmux_option "@catppuccin_no_patched_fonts_theme_enabled" "off")"
   readonly no_patched_fonts_theme_enabled
 
+  local tab_separator
+  tab_separator="$(get_tmux_option "@catppuccin_tab_separator" "")"
+  readonly tab_separator
+
   # Separators for the left status / window list
   local l_left_separator
   l_left_separator="$(get_tmux_option "@catppuccin_l_left_separator" "")"
